@@ -1,9 +1,9 @@
 from django.urls import path 
-from .consumers import  GetUserConntactsConsumers, UserStatusOnlineOfflineConsumer
-from apps.chat.routing import ws_urlpatterns as ws_chat
+from .consumers import   UserStatusOnlineOfflineConsumer, GetMyContactsConsumers
+
 ws_urlpatterns = [
     path("ws/users/status", UserStatusOnlineOfflineConsumer.as_asgi(), name="online_offline"
          ),
-    path("ws/users/test", GetUserConntactsConsumers.as_asgi(), name="get_user_data" )
+    path("ws/users/my/contacts", GetMyContactsConsumers.as_asgi(), name="get_my_contacts" ),
 ]
-ws_urlpatterns += ws_chat
+# ws_urlpatterns += ws_chat

@@ -20,6 +20,12 @@ class AvatarModel(models.Model):
     profile = models.ForeignKey(ProfileModel, on_delete=models.CASCADE, related_name='avatar')
 
 
+class MetaDataModel(models.Model):
+    class Meta:
+        db_table = "meta_data"
+    
+    data_style =  models.JSONField()
+
 class UserModel(AbstractBaseUser, PermissionsMixin, CoreModel):
     class Meta:
         db_table = "auth_users"
@@ -29,6 +35,8 @@ class UserModel(AbstractBaseUser, PermissionsMixin, CoreModel):
     phone = models.CharField(max_length=128)
     nickname = models.CharField(max_length=128, unique=True, blank=True, null=True)
     
+
+
     #base_parametr
     is_online = models.BooleanField(default=False)
 
@@ -43,9 +51,11 @@ class UserModel(AbstractBaseUser, PermissionsMixin, CoreModel):
 
     # Account
     profile = models.OneToOneField(ProfileModel, on_delete=models.CASCADE, blank=True, null=True, related_name='user')
-    contacts = models.ManyToManyField("self", symmetrical=False, blank=True, null=True, related_name="user")
- 
+    contacts = models.ManyToManyField("self", symmetrical=False, blank=True, null=True, related_name="contact_by")
+    block_users = models.ManyToManyField("self", symmetrical=False, blank=True, null=True, related_name='block_by' )
+    meta_data = models.OneToOneField(MetaDataModel, on_delete=models.CASCADE, blank=True, null=True)
     USERNAME_FIELD = "email"
-    objects = UserManager()
+    objects = UserManager() 
 
 
+    

@@ -9,7 +9,6 @@ urlpatterns = [
     path('find/nickname', GetUserByNickname.as_view(), name="get_user_by_nickname"),
     path('contact/add', AddToContactById.as_view(), name="add_user_to_contact"),
     path('contact/del', DeleteToContactById.as_view(), name="delete_user_to_contact"),
-    path('test', GetMyContactsApiView.as_view() ),
     path('profile/update', UpdateProfileApiView.as_view(), name="update_profile_user"),
     path('user/update', UpdateUserApiView.as_view(), name="update_user")
 
